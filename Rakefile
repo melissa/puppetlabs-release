@@ -76,7 +76,7 @@ def build_rpm(dist)
   mkdir_p "#{temp}/SOURCES"
   mkdir_p "#{temp}/SPECS"
   cp_p "files/RPM-GPG-KEY-puppetlabs", "#{temp}/SOURCES/RPM-GPG-KEY-puppetlabs"
-  erb "templates/redhat/puppetlabs.repo.erb", "#{temp}/SOURCES/puppetlabs.repo"
+  erb "templates/redhat/puppetlabs-build-tools.repo.erb", "#{temp}/SOURCES/puppetlabs-build-tools.repo"
   erb "templates/redhat/#{@name}.spec.erb", "#{temp}/SPECS/#{@name}.spec"
   sh "rpmbuild -bs #{args} --nodeps #{temp}/SPECS/#{@name}.spec"
   output = `find #{temp} -name *.rpm`
