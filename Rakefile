@@ -69,7 +69,7 @@ def build_rpm(dist)
   args = rpm_define + ' ' + rpm_old_version
   mkdir_p temp
   topdir = "pkg/rpm"
-  base = "#{topdir}/#{@dist}/#{@codename}/products"
+  base = "#{topdir}/#{@dist}/#{@codename}"
   mkdir_p "#{base}/SRPMS"
   mkdir_p "#{base}/i386"
   mkdir_p "#{base}/x86_64"
