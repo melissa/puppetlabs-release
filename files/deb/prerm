@@ -2,14 +2,10 @@
 
 set -e
 
-if [ -f /etc/apt/trusted.gpg.d/pl-keyring.gpg ]; then
-    rm -f /etc/apt/trusted.gpg.d/pl-keyring.gpg
+if [ -f /etc/apt/trusted.gpg.d/pl-build-tools-keyring.gpg ]; then
+    rm -f /etc/apt/trusted.gpg.d/pl-build-tools-keyring.gpg
 fi
 
-if [ -f /etc/apt/trusted.gpg.d/pl-devel-keyring.gpg ]; then
-    rm -f /etc/apt/trusted.gpg.d/pl-devel-keyring.gpg
-fi
-
-if [ -f /etc/apt/sources.list.d/puppetlabs-devel.list ]; then
-    rm -f /etc/apt/sources.list.d/puppetlabs-devel.list
+if [ -f /etc/apt/sources.list.d/puppetlabs-build-tools.list ]; then
+    rm -f /etc/apt/sources.list.d/puppetlabs-build-tools.list
 fi
