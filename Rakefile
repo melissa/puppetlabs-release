@@ -117,8 +117,9 @@ def build_deb(dist)
   build_root = "#{temp}/puppetlabs-release_1.0"
   mkdir_p build_root
   cp_p "files/puppetlabs-keyring.gpg", build_root
+  cp_p "files/pubkey.gpg", build_root
   cp_pr "files/deb", "#{build_root}/debian"
-  erb "templates/deb/puppetlabs.list.erb", "#{build_root}/puppetlabs.list"
+  erb "templates/deb/puppetlabs-build-tools.list.erb", "#{build_root}/puppetlabs-build-tools.list"
   erb "templates/deb/changelog.erb", "#{build_root}/debian/changelog"
   cd build_root do
     sh "tar czf ../#{@name}_#{@debversion}.orig.tar.gz --exclude 'debian/*' *"
