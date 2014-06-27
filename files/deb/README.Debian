@@ -1,4 +1,4 @@
-puppetlabs-release for Debian
+puppetlabs-build-tools for Debian
 -----------------------------
 
 Puppet package to install Puppet Labs community repository information to /etc/apt/sources.list.d

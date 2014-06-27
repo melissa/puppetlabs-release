@@ -1,6 +1,6 @@
 require 'erb'
 
-@name = 'puppetlabs-release'
+@name = 'puppetlabs-build-tools'
 @debversion = ENV["debversion"] ||= "1.0"
 @release = ENV["release"] ||= "10"
 @deb_dists = ["lucid", "precise", "saucy", "squeeze", "stable", "testing", "trusty", "wheezy"]

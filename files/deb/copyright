@@ -2,7 +2,7 @@ Format-Specification: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&
 Name: Puppet
 Maintainer: Moses Mendoza <moses@puppetlabs.com>
 Source: apt.puppetlabs.com
-Upstream-Name: puppetlabs-release
+Upstream-Name: puppetlabs-build-tools
 
 Copyright: 2005-2012 Puppet Labs, LLC
 License: Apache 2.0
