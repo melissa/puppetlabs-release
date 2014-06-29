@@ -1,6 +1,6 @@
 require 'erb'
 
-@name = 'puppetlabs-build-tools'
+@name = 'pl-build-tools-release'
 @debversion = ENV["debversion"] ||= "1.0"
 @release = ENV["release"] ||= "10"
 @deb_dists = ["lucid", "precise", "saucy", "squeeze", "stable", "testing", "trusty", "wheezy"]
@@ -76,7 +76,7 @@ def build_rpm(dist)
   mkdir_p "#{temp}/SOURCES"
   mkdir_p "#{temp}/SPECS"
   cp_p "files/RPM-GPG-KEY-puppetlabs", "#{temp}/SOURCES/RPM-GPG-KEY-puppetlabs"
-  erb "templates/redhat/puppetlabs-build-tools.repo.erb", "#{temp}/SOURCES/puppetlabs-build-tools.repo"
+  erb "templates/redhat/pl-build-tools-release.repo.erb", "#{temp}/SOURCES/pl-build-tools-release.repo"
   erb "templates/redhat/#{@name}.spec.erb", "#{temp}/SPECS/#{@name}.spec"
   sh "rpmbuild -bs #{args} --nodeps #{temp}/SPECS/#{@name}.spec"
   output = `find #{temp} -name *.rpm`
@@ -118,7 +118,7 @@ def build_deb(dist)
   mkdir_p build_root
   cp_p "files/pl-build-tools-keyring.gpg", build_root
   cp_pr "files/deb", "#{build_root}/debian"
-  erb "templates/deb/puppetlabs-build-tools.list.erb", "#{build_root}/puppetlabs-build-tools.list"
+  erb "templates/deb/pl-build-tools-release.list.erb", "#{build_root}/pl-build-tools-release.list"
   erb "templates/deb/changelog.erb", "#{build_root}/debian/changelog"
   cd build_root do
     sh "tar czf ../#{@name}_#{@debversion}.orig.tar.gz --exclude 'debian/*' *"

@@ -1,4 +1,4 @@
-Source: puppetlabs-build-tools
+Source: pl-build-tools-release
 Section: admin
 Priority: extra
 Maintainer: Puppet Labs <info@puppetlabs.com>
@@ -9,7 +9,7 @@ Vcs-Git: git://github.com/puppetlabs/puppetlabs-release.git
 Vcs-Browser: http://github.com/puppetlabs/puppetlabs-release.git
 Homepage: http://pl-build-tools.delivery.puppetlabs.lan/debian/
 
-Package: puppetlabs-build-tools
+Package: pl-build-tools-release
 Architecture: all
 Depends: ${misc:Depends}
 Description: "Package to install Puppet Labs gpg key and apt repo"

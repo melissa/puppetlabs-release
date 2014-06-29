@@ -6,6 +6,6 @@ if [ -f /etc/apt/trusted.gpg.d/pl-build-tools.gpg ]; then
     rm -f /etc/apt/trusted.gpg.d/pl-build-tools.gpg
 fi
 
-if [ -f /etc/apt/sources.list.d/puppetlabs-build-tools.list ]; then
-    rm -f /etc/apt/sources.list.d/puppetlabs-build-tools.list
+if [ -f /etc/apt/sources.list.d/pl-build-tools-release.list ]; then
+    rm -f /etc/apt/sources.list.d/pl-build-tools-release.list
 fi

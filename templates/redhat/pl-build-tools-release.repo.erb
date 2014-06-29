@@ -1,11 +1,11 @@
-[puppetlabs-build-tools]
+[pl-build-tools-release]
 name=Puppet Labs Build Tools <%= @dist.capitalize -%> <%= @version -%> - $basearch
 baseurl=http://pl-build-tools.delivery.puppetlabs.net/yum/<%= @dist.downcase -%>/<%= @codename -%>/$basearch
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs
 enabled=1
 gpgcheck=1
 
-[puppetlabs-build-tools-source]
+[pl-build-tools-release-source]
 name=Puppet Labs Build Tools <%= @dist.capitalize -%> <%= @version -%> - $basearch - Source
 baseurl=http://pl-build-tools.delivery.puppetlabs.net/yum/<%= @dist.downcase -%>/<%= @codename -%>/SRPMS
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs

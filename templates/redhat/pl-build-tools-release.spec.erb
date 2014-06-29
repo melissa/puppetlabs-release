@@ -11,7 +11,7 @@ License:        ASL 2.0
 # within this srpm.
 URL:            http://pl-build-tools.puppetlabs.net
 Source0:        http://yum.puppetlabs.com/RPM-GPG-KEY-puppetlabs
-Source1:        puppetlabs-build-tools.repo
+Source1:        pl-build-tools-release.repo
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -46,7 +46,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%config(noreplace) /etc/yum.repos.d/puppetlabs-build-tools.repo
+%config(noreplace) /etc/yum.repos.d/pl-build-tools-release.repo
 %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs
 
 

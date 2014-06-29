@@ -1,2 +1,2 @@
 pl-build-tools-keyring.gpg /etc/apt/trusted.gpg.d
-puppetlabs-build-tools.list /etc/apt/sources.list.d
+pl-build-tools-release.list /etc/apt/sources.list.d
