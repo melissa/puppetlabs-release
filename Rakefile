@@ -1,6 +1,6 @@
 require 'erb'
 
-@name = 'puppetlabs-release'
+@name = 'pl-build-tools-release'
 @debversion = ENV["debversion"] ||= "1.0"
 @release = ENV["release"] ||= "11"
 @deb_dists = ["jessie", "lucid", "precise", "squeeze", "stable", "testing", "trusty", "utopic", "wheezy"]
@@ -8,8 +8,8 @@ require 'erb'
 @nosign ||= ENV["no_sign"]
 @signmacros = %{--define "%_gpg_name #{@signwith}"}
 @signmacros_el5 = %{--define "%__gpg_sign_cmd %{__gpg} gpg --force-v3-sigs --digest-algo=sha1 --batch --no-verbose --no-armor --passphrase-fd 3 --no-secmem-warning -u %{_gpg_name} -sbo %{__signature_filename} %{__plaintext_filename}"}
-@rpm_rsync_url = ENV["rpm_rsync_url"] ||= "#{ENV["USER"]}@yum.puppetlabs.com:/opt/repository/yum"
-@deb_rsync_url = ENV["deb_rsync_url"] ||= "#{ENV["USER"]}@apt.puppetlabs.com:/opt/repository/incoming"
+@rpm_rsync_url = ENV["rpm_rsync_url"] ||= "#{ENV["USER"]}@pl-build-tools.delivery.puppetlabs.net:/opt/build-tools/yum"
+@deb_rsync_url = ENV["deb_rsync_url"] ||= "#{ENV["USER"]}@pl-build-tools.delivery.puppetlabs.net:/opt/tools/freight.build-tools/apt"
 
 @matrix = {
   :el5 => { :dist => 'el', :codename => '5', :version => '5' },
@@ -69,15 +69,14 @@ def build_rpm(dist)
   args = rpm_define + ' ' + rpm_old_version
   mkdir_p temp
   topdir = "pkg/rpm"
-  base = "#{topdir}/#{@dist}/#{@codename}/products"
+  base = "#{topdir}/#{@dist}/#{@codename}"
   mkdir_p "#{base}/SRPMS"
   mkdir_p "#{base}/i386"
   mkdir_p "#{base}/x86_64"
   mkdir_p "#{temp}/SOURCES"
   mkdir_p "#{temp}/SPECS"
-  cp_p "files/RPM-GPG-KEY-puppetlabs", "#{temp}/SOURCES/RPM-GPG-KEY-puppetlabs"
-  cp_p "files/RPM-GPG-KEY-nightly-puppetlabs", "#{temp}/SOURCES/RPM-GPG-KEY-nightly-puppetlabs"
-  erb "templates/redhat/puppetlabs.repo.erb", "#{temp}/SOURCES/puppetlabs.repo"
+  cp_p "files/RPM-GPG-KEY-puppetlabs-build-tools", "#{temp}/SOURCES/RPM-GPG-KEY-puppetlabs-build-tools"
+  erb "templates/redhat/pl-build-tools.repo.erb", "#{temp}/SOURCES/pl-build-tools.repo"
   erb "templates/redhat/#{@name}.spec.erb", "#{temp}/SPECS/#{@name}.spec"
   sh "rpmbuild -bs #{args} --nodeps #{temp}/SPECS/#{@name}.spec"
   output = `find #{temp} -name *.rpm`
@@ -115,12 +114,11 @@ def build_deb(dist)
   temp = get_temp
   base = "pkg/deb/#{@dist}"
   mkdir_p base
-  build_root = "#{temp}/puppetlabs-release_1.0"
+  build_root = "#{temp}/pl-build-tools-release_1.0"
   mkdir_p build_root
-  cp_p "files/puppetlabs-keyring.gpg", build_root
-  cp_p "files/puppetlabs-nightly-keyring.gpg", build_root
+  cp_p "files/pl-build-tools-keyring.gpg", build_root
   cp_pr "files/deb", "#{build_root}/debian"
-  erb "templates/deb/puppetlabs.list.erb", "#{build_root}/puppetlabs.list"
+  erb "templates/deb/pl-build-tools.list.erb", "#{build_root}/pl-build-tools.list"
   erb "templates/deb/changelog.erb", "#{build_root}/debian/changelog"
   cd build_root do
     sh "tar czf ../#{@name}_#{@debversion}.orig.tar.gz --exclude 'debian/*' *"
